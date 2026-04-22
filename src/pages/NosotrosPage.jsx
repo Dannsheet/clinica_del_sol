@@ -1,17 +1,43 @@
+import { useEffect, useRef } from "react";
+
 export default function NosotrosPage() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const items = root.querySelectorAll(".aboutPage-animate");
+    if (!items.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("aboutPage-animateIn");
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -10% 0px" },
+    );
+
+    items.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="aboutPage" aria-labelledby="nosotros-titulo">
+    <section ref={rootRef} className="aboutPage" aria-label="Nosotros">
       <div className="container">
         <header className="aboutPage-hero aboutPage-animate">
-          <h1 id="nosotros-titulo" className="aboutPage-title">
-            Comprometidos con tu bienestar, respaldados por la excelencia.
-          </h1>
-          <p className="aboutPage-lead">
-            Cuidamos tu vida con el más alto estándar médico.
-          </p>
-          <p className="aboutPage-history">
-            21 años brindando un servicio de salud integral.
-          </p>
+          <div className="aboutPage-heroMedia" aria-hidden="true">
+            <img
+              className="aboutPage-heroImage"
+              src="https://liqeparockamqivsqmtv.supabase.co/storage/v1/object/public/imagenes/DSC05299_resultado.webp"
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </header>
 
         <div className="aboutPage-values" aria-label="Misión y visión de la clínica">

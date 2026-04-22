@@ -37,10 +37,16 @@ const hospitalServices = [
     Icon: resolveIcon("Stethoscope"),
   },
   {
-    title: "Neonatología",
+    title: "UCI Neonatología",
     description:
       "Atención para recién nacidos con monitoreo y cuidados dedicados en cada etapa.",
     Icon: resolveIcon("Baby"),
+  },
+  {
+    title: "UCI Adultos",
+    description:
+      "Atencion para personas mayores con monitoreo y cuidados especializados.",
+    Icon: resolveIcon("Heart"),
   },
   {
     title: "Quirófano",
@@ -97,7 +103,9 @@ function chunkArray(items, chunkSize) {
 
 export default function HomePage() {
   const videoSrc =
-    "https://liqeparockamqivsqmtv.supabase.co/storage/v1/object/public/videos/0129.mp4";
+    "https://liqeparockamqivsqmtv.supabase.co/storage/v1/object/public/videos/001.mp4";
+  const videoSrcMobile =
+    "https://liqeparockamqivsqmtv.supabase.co/storage/v1/object/public/videos/000001-vertical.mp4";
   const navigate = useNavigate();
   const [sloganIn, setSloganIn] = useState(false);
   const [galleryIn, setGalleryIn] = useState(false);
@@ -298,13 +306,15 @@ export default function HomePage() {
         <div className="homeHero-media" aria-hidden="true">
           <video
             className="homeHero-video"
-            src={videoSrc}
             autoPlay
             muted
             playsInline
             loop
             preload="metadata"
-          />
+          >
+            <source src={videoSrcMobile} media="(max-width: 720px)" type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
+          </video>
         </div>
 
         <div className="homeHero-content">
@@ -332,11 +342,7 @@ export default function HomePage() {
             />
 
             <p className="homeAbout-text">
-              En Clínica del Sol buscamos satisfacer en forma integral las
-              necesidades del cuidado de la salud de nuestros pacientes,
-              facilitándoles una infraestructura adecuada, equipamiento médico
-              de alta calidad y un equipo de profesionales capacitados en
-              ejercicio de su vocación.
+             En Clínica del Sol brindamos atención médica integral con altos estándares de calidad, combinando tecnología, infraestructura moderna y un equipo humano comprometido con el bienestar y la recuperación de cada paciente.
             </p>
 
             <Link className="homeAbout-cta" to="/nosotros">

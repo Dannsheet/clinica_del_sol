@@ -375,7 +375,7 @@
   letter-spacing: 0.02em;
   padding: 8px 0;
   border-bottom: 1px solid rgba(10, 12, 16, 0.18);
-  animation: homeAboutCtaPulse 260ms ease-in-out infinite;
+  animation: homeAboutCtaPulse 1800ms ease-in-out infinite;
 }
 
 .homeAbout-cta:hover {
@@ -485,7 +485,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 }
 
@@ -513,7 +513,7 @@
 
 .aboutPage {
   position: relative;
-  padding: 72px 0 84px;
+  padding: 0 0 84px;
   background: linear-gradient(180deg, #ffffff 0%, rgba(245, 249, 255, 0.9) 100%);
   overflow: hidden;
 }
@@ -535,8 +535,45 @@
 
 .aboutPage-hero {
   text-align: center;
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
+}
+
+.aboutPage-heroMedia {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.aboutPage-heroMedia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(11 22 199 / 28%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aboutPage-heroImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  object-fit: contain;
+  max-height: none;
+  position: relative;
+  z-index: 0;
+}
+
+@media (min-width: 721px) {
+  .aboutPage-heroImage {
+    height: clamp(280px, 82vh, 520px);
+    object-fit: cover;
+    object-position: center top;
+  }
 }
 
 .aboutPage-title {
@@ -603,18 +640,21 @@
 .aboutPage-animate {
   opacity: 0;
   transform: translateY(22px);
+}
+
+.aboutPage-animate.aboutPage-animateIn {
   animation: aboutPageReveal 760ms ease-out forwards;
 }
 
-.aboutPage-hero.aboutPage-animate {
+.aboutPage-hero.aboutPage-animate.aboutPage-animateIn {
   animation-delay: 80ms;
 }
 
-.aboutPage-cardVision.aboutPage-animate {
+.aboutPage-cardVision.aboutPage-animate.aboutPage-animateIn {
   animation-delay: 230ms;
 }
 
-.aboutPage-cardMission.aboutPage-animate {
+.aboutPage-cardMission.aboutPage-animate.aboutPage-animateIn {
   animation-delay: 320ms;
 }
 
@@ -769,7 +809,7 @@
   }
 
   .aboutPage {
-    padding: 56px 0 64px;
+    padding: 0 0 64px;
   }
 
   .aboutPage-values {
@@ -808,6 +848,10 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .aboutPage-animate.aboutPage-animateIn {
+    animation: none;
   }
 }
 
